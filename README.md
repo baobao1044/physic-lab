@@ -6,9 +6,7 @@
 
 ## 🎮 Play Now
 
-👉 **[Play Physic Lab](https://<your-username>.github.io/physic-lab/)**
-
-*(Replace `<your-username>` with your GitHub username after deployment)*
+👉 **[Play Physic Lab](https://baobao1044.github.io/physic-lab/)**
 
 ## ✨ Features
 
