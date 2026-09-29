@@ -1165,26 +1165,19 @@ button.menuClose:hover {
 }
 
 /* ==========================================================================
-   FOOTER / EXTRA INFO
+   FOOTER / EXTRA INFO - COMPLETELY HIDDEN
    ========================================================================== */
-#extraInfo {
-  margin-top: 14px;
-  border-top: 1px solid var(--ml-border-subtle);
-  padding-top: 12px;
-  color: var(--ml-text-dim);
-  font-size: 0.76rem;
-  font-family: var(--ml-font);
-}
-
-#extraInfo a {
-  color: var(--ml-cyan) !important;
-  text-decoration: none !important;
-  transition: color 0.15s ease;
-}
-
-#extraInfo a:hover {
-  color: #fff !important;
-  text-decoration: underline !important;
+#extraInfo,
+#extraLinks,
+#attribution,
+.extraInfo-right {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 /* ==========================================================================
