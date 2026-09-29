@@ -1,0 +1,1312 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* ==========================================================================
+   Physic Lab - High-Tech Glassmorphic Science Lab Theme
+   Made by baobg and Ryan
+   ========================================================================== */
+
+:root {
+  /* Core Color Palette */
+  --ml-bg-deep: #070a14;
+  --ml-bg-void: #020409;
+  --ml-bg-surface: rgba(13, 20, 36, 0.78);
+  --ml-bg-surface-elevated: rgba(18, 28, 52, 0.9);
+  --ml-bg-surface-hover: rgba(26, 38, 68, 0.85);
+  --ml-bg-card: rgba(255, 255, 255, 0.035);
+  --ml-bg-card-hover: rgba(255, 255, 255, 0.08);
+
+  /* Borders & Accents */
+  --ml-border-subtle: rgba(255, 255, 255, 0.08);
+  --ml-border-medium: rgba(255, 255, 255, 0.16);
+  --ml-border-bright: rgba(0, 240, 255, 0.45);
+  --ml-border-accent: rgba(56, 189, 248, 0.35);
+
+  /* Typography */
+  --ml-text-main: #f8fafc;
+  --ml-text-muted: #94a3b8;
+  --ml-text-dim: #64748b;
+
+  /* Neon Lab Accents */
+  --ml-cyan: #00f0ff;
+  --ml-cyan-glow: rgba(0, 240, 255, 0.35);
+  --ml-cyan-soft: rgba(0, 240, 255, 0.12);
+  --ml-emerald: #10b981;
+  --ml-emerald-glow: rgba(16, 185, 129, 0.35);
+  --ml-purple: #8b5cf6;
+  --ml-purple-glow: rgba(139, 92, 246, 0.35);
+  --ml-amber: #f59e0b;
+  --ml-amber-glow: rgba(245, 158, 11, 0.35);
+  --ml-rose: #f43f5e;
+  --ml-rose-glow: rgba(244, 63, 94, 0.35);
+  --ml-blue: #3b82f6;
+
+  /* Typography Stacks - Plus Jakarta Sans & JetBrains Mono */
+  --ml-font: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --ml-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Radii */
+  --ml-radius-xs: 4px;
+  --ml-radius-sm: 6px;
+  --ml-radius-md: 10px;
+  --ml-radius-lg: 16px;
+  --ml-radius-xl: 22px;
+  --ml-radius-full: 9999px;
+
+  /* Shadows & Glass Filter */
+  --ml-shadow-panel: 0 16px 40px -12px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --ml-shadow-glow: 0 0 24px -2px var(--ml-cyan-glow);
+  --ml-backdrop-blur: blur(20px) saturate(180%);
+}
+
+/* ==========================================================================
+   GLOBAL RESETS & BACKGROUND
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  font-family: var(--ml-font);
+}
+
+html, body,
+button, input, select, textarea,
+.menuScreen, #infoScreen, #modManager, #savePromptMenu, #settingsMenu,
+.menuText, .menuTitle, .categoryButton, .elementButton, .controlButton,
+#extraInfo, table, td, th, p, span, h1, h2, h3, h4, h5, h6, a, label, optgroup, option {
+  font-family: var(--ml-font) !important;
+}
+
+.stat, #stats, .modern-brush-badge, code, kbd, pre,
+#stat-pos, #stat-pixels, #stat-tps, #stat-ticks,
+.stat span {
+  font-family: var(--ml-font-mono) !important;
+}
+
+html, body {
+  background-color: var(--ml-bg-deep) !important;
+  color: var(--ml-text-main);
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+body {
+  background-color: var(--ml-bg-deep) !important;
+  background-image: 
+    radial-gradient(circle at 10% 10%, rgba(0, 240, 255, 0.06) 0%, transparent 45%),
+    radial-gradient(circle at 90% 15%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 50% 90%, rgba(16, 185, 129, 0.04) 0%, transparent 60%) !important;
+  background-attachment: fixed !important;
+}
+
+#pagetitle {
+  display: none !important;
+}
+
+/* ==========================================================================
+   TRIỆT TIÊU HOÀN TOÀN PIXEL CORNERS & CÁC PSEUDO-ELEMENTS CŨ
+   ========================================================================== */
+.controlButton,
+.elementButton,
+.categoryButton,
+.pixel-corners,
+#category-tools button,
+#category-tools .elementButton,
+#categoryControls button,
+#toolControls button {
+  clip-path: none !important;
+  -webkit-clip-path: none !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.controlButton::after,
+.elementButton::after,
+.categoryButton::after,
+.pixel-corners::after,
+.pixel-corners--wrapper::after,
+#category-tools button::after,
+#category-tools .elementButton::after,
+#categoryControls button::after,
+#toolControls button::after,
+#controls button[on="true"]::after,
+#controls .elementButton[current="true"]::after,
+#controls .elementButton[modified="true"]::after {
+  display: none !important;
+  content: none !important;
+  clip-path: none !important;
+  -webkit-clip-path: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================================================
+   TOP BAR - BRANDING & STATUS (DARK GLASSMORPHIC)
+   ========================================================================== */
+#modern-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px;
+  background: var(--ml-bg-surface);
+  backdrop-filter: var(--ml-backdrop-blur);
+  -webkit-backdrop-filter: var(--ml-backdrop-blur);
+  border-bottom: 1px solid var(--ml-border-subtle);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  font-family: var(--ml-font);
+  gap: 16px;
+}
+
+.modern-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.modern-logo-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #00f0ff 0%, #3b82f6 50%, #8b5cf6 100%);
+  border-radius: var(--ml-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #030712;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.45), inset 0 0 8px rgba(255, 255, 255, 0.4);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.modern-brand:hover .modern-logo-icon {
+  transform: rotate(15deg) scale(1.05);
+  box-shadow: 0 0 28px rgba(0, 240, 255, 0.65), inset 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.modern-brand-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.modern-brand-title {
+  font-size: 1.12rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  background: linear-gradient(100deg, #ffffff 10%, #67e8f9 50%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
+  text-shadow: 0 2px 10px rgba(0, 240, 255, 0.2);
+}
+
+.modern-brand-subtitle {
+  font-size: 0.73rem;
+  color: var(--ml-text-muted);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.modern-brand-subtitle .author {
+  color: #38bdf8;
+  font-weight: 600;
+  background: rgba(56, 189, 248, 0.1);
+  padding: 1px 5px;
+  border-radius: 4px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+/* Center Toolbar Info */
+.modern-center-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-grow: 1;
+  justify-content: center;
+  max-width: 640px;
+}
+
+.modern-active-elem-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--ml-border-subtle);
+  border-radius: var(--ml-radius-full);
+  padding: 5px 14px 5px 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ml-text-main);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.modern-active-elem-badge:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--ml-border-bright);
+  box-shadow: 0 0 14px var(--ml-cyan-glow);
+  transform: translateY(-1px);
+}
+
+.modern-elem-swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 10px currentColor;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Quick Search Container */
+.modern-search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 320px;
+}
+
+.modern-search-input {
+  width: 100%;
+  background: rgba(6, 10, 22, 0.6);
+  border: 1px solid var(--ml-border-subtle);
+  border-radius: var(--ml-radius-full);
+  padding: 8px 36px 8px 36px;
+  color: var(--ml-text-main);
+  font-size: 0.84rem;
+  font-family: var(--ml-font);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.modern-search-input:focus {
+  border-color: var(--ml-cyan);
+  box-shadow: 0 0 18px var(--ml-cyan-glow);
+  background: rgba(6, 10, 22, 0.95);
+}
+
+.modern-search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--ml-text-dim);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modern-search-kbd {
+  position: absolute;
+  right: 12px;
+  font-family: var(--ml-font-mono);
+  font-size: 0.68rem;
+  color: var(--ml-text-dim);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 1px 5px;
+  pointer-events: none;
+  font-weight: 600;
+}
+
+/* Quick Search Results Dropdown */
+.modern-search-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 360px;
+  max-height: 420px;
+  overflow-y: auto;
+  background: var(--ml-bg-surface-elevated);
+  backdrop-filter: var(--ml-backdrop-blur);
+  -webkit-backdrop-filter: var(--ml-backdrop-blur);
+  border: 1px solid var(--ml-border-bright);
+  border-radius: var(--ml-radius-md);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 240, 255, 0.15);
+  z-index: 999999 !important;
+  display: none;
+  padding: 8px;
+}
+
+.modern-search-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: var(--ml-radius-sm);
+  cursor: pointer;
+  font-size: 0.84rem;
+  color: var(--ml-text-main);
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.modern-search-item:hover,
+.modern-search-item.selected {
+  background: rgba(0, 240, 255, 0.16);
+  color: #fff;
+  transform: translateX(2px);
+}
+
+.modern-search-item-cat {
+  font-size: 0.7rem;
+  color: var(--ml-text-dim);
+  margin-left: auto;
+  text-transform: capitalize;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 7px;
+  border-radius: var(--ml-radius-full);
+}
+
+/* Top Actions */
+.modern-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.modern-icon-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--ml-border-subtle);
+  color: var(--ml-text-muted);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ml-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 15px;
+  padding: 0;
+  outline: none;
+}
+
+.modern-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-color: var(--ml-border-bright);
+  box-shadow: 0 0 12px var(--ml-cyan-glow);
+  transform: translateY(-1px);
+}
+
+.modern-icon-btn:active {
+  transform: translateY(0) scale(0.96);
+}
+
+/* Live Simulation Status Badge */
+.modern-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 6px 12px;
+  border-radius: var(--ml-radius-full);
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--ml-emerald);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.15);
+  user-select: none;
+  transition: all 0.25s ease;
+}
+
+.modern-status-indicator.paused {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--ml-amber);
+  border-color: rgba(245, 158, 11, 0.3);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.15);
+}
+
+.modern-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: currentColor;
+  box-shadow: 0 0 8px currentColor;
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+.modern-status-indicator.paused .modern-status-dot {
+  animation: none;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* ==========================================================================
+   LAYOUT CONTAINERS & GAME CANVAS
+   ========================================================================== */
+#totalWrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px 40px 20px;
+}
+
+#gameWrapper {
+  padding: 12px 0 0 0;
+}
+
+#gameDiv {
+  border: 1px solid var(--ml-border-subtle) !important;
+  border-radius: var(--ml-radius-lg) !important;
+  overflow: hidden !important;
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+  background: var(--ml-bg-void) !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+
+#canvasDiv {
+  position: relative !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  background-color: #000000 !important;
+  overflow: hidden !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Subtle vignette overlay for polished lab-instrument feel */
+#canvasDiv::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
+  border-radius: inherit;
+}
+
+/* Giữ canvas căn giữa hoàn hảo, không dùng transform subpixel để chuột vẽ chuẩn 100% */
+#game {
+  display: block !important;
+  position: relative !important;
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  border: none !important;
+  max-width: 100% !important;
+  max-height: 56vh !important;
+  aspect-ratio: auto !important;
+  /* Smooth anti-aliased rendering — particles look softer, less blocky */
+  image-rendering: auto !important;
+  box-sizing: content-box !important;
+  border-radius: 4px !important;
+  /* Subtle visual enhancement: slightly boost contrast and saturation */
+  filter: contrast(1.06) saturate(1.12) !important;
+  /* Soft ambient glow around the canvas */
+  box-shadow:
+    0 0 30px 5px rgba(0, 200, 255, 0.06),
+    0 0 80px 10px rgba(0, 100, 255, 0.03),
+    inset 0 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+#underDiv {
+  padding: 12px 16px 16px 16px;
+  background: linear-gradient(180deg, rgba(8, 12, 24, 0.95) 0%, rgba(5, 8, 18, 0.98) 100%);
+  border-top: 1px solid var(--ml-border-subtle);
+}
+
+/* ==========================================================================
+   STATS BAR (HIGH-TECH HUD STYLE)
+   ========================================================================== */
+#stats {
+  font-family: var(--ml-font-mono) !important;
+  font-size: 0.77rem !important;
+  font-variant-numeric: tabular-nums !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 7px !important;
+  padding: 8px 14px !important;
+  margin: 0 0 12px 0 !important;
+  height: auto !important;
+  min-height: 38px !important;
+  line-height: normal !important;
+  overflow: visible !important;
+  background: var(--ml-bg-surface) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid var(--ml-border-subtle) !important;
+  border-radius: var(--ml-radius-md) !important;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+.stat {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  padding: 3px 9px !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: var(--ml-radius-sm) !important;
+  color: var(--ml-text-muted) !important;
+  white-space: nowrap !important;
+  font-weight: 500 !important;
+}
+
+#stat-pos {
+  color: #38bdf8 !important;
+  border-color: rgba(56, 189, 248, 0.25) !important;
+  background: rgba(56, 189, 248, 0.06) !important;
+  font-weight: 600 !important;
+}
+
+#stat-pixels {
+  color: #c084fc !important;
+  border-color: rgba(192, 132, 252, 0.25) !important;
+  background: rgba(192, 132, 252, 0.06) !important;
+}
+
+#stat-tps {
+  color: #34d399 !important;
+  border-color: rgba(52, 211, 153, 0.25) !important;
+  background: rgba(52, 211, 153, 0.06) !important;
+  font-weight: 600 !important;
+}
+
+#stat-ticks {
+  color: var(--ml-text-dim) !important;
+}
+
+#stat-element span {
+  color: var(--ml-cyan) !important;
+  font-weight: 700 !important;
+  text-shadow: 0 0 10px var(--ml-cyan-glow) !important;
+}
+
+#stat-temperature {
+  color: #fb923c !important;
+  border-color: rgba(251, 146, 60, 0.25) !important;
+  background: rgba(251, 146, 60, 0.06) !important;
+  font-weight: 600 !important;
+}
+
+#stat-burning {
+  color: #ff4757 !important;
+  border-color: rgba(255, 71, 87, 0.4) !important;
+  background: rgba(255, 71, 87, 0.15) !important;
+  font-weight: 700 !important;
+  animation: pulse-dot 1.2s infinite ease-in-out;
+}
+
+.stat.redText {
+  color: var(--ml-rose) !important;
+  border-color: rgba(244, 63, 94, 0.4) !important;
+  background: rgba(244, 63, 94, 0.12) !important;
+  font-weight: bold !important;
+}
+
+/* ==========================================================================
+   TOOLBAR (TOOL CONTROLS) - FLOATING DOCK
+   ========================================================================== */
+#toolControls {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 10px 14px !important;
+  background: var(--ml-bg-surface) !important;
+  backdrop-filter: var(--ml-backdrop-blur) !important;
+  -webkit-backdrop-filter: var(--ml-backdrop-blur) !important;
+  border: 1px solid var(--ml-border-subtle) !important;
+  border-radius: var(--ml-radius-lg) !important;
+  margin-bottom: 10px !important;
+  box-shadow: var(--ml-shadow-panel) !important;
+}
+
+#toolControls button,
+.controlButton {
+  clip-path: none !important;
+  border-radius: var(--ml-radius-md) !important;
+  border: 1px solid var(--ml-border-subtle) !important;
+  background: rgba(255, 255, 255, 0.045) !important;
+  color: var(--ml-text-main) !important;
+  font-family: var(--ml-font) !important;
+  font-size: 0.81rem !important;
+  font-weight: 600 !important;
+  padding: 0 14px !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 7px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  outline: none !important;
+  user-select: none !important;
+  text-decoration: none !important;
+}
+
+#toolControls button:hover,
+.controlButton:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+#toolControls button:active,
+.controlButton:active {
+  transform: translateY(0) scale(0.96) !important;
+}
+
+/* Button Active Toggle State */
+#toolControls button[on="true"],
+.controlButton[on="true"] {
+  background: rgba(0, 240, 255, 0.16) !important;
+  border-color: var(--ml-cyan) !important;
+  color: #fff !important;
+  box-shadow: 0 0 14px var(--ml-cyan-glow) !important;
+}
+
+/* Pause Button Special Style */
+#pauseButton {
+  background: rgba(16, 185, 129, 0.14) !important;
+  border-color: rgba(16, 185, 129, 0.4) !important;
+  color: #34d399 !important;
+}
+
+#pauseButton:hover {
+  background: rgba(16, 185, 129, 0.25) !important;
+  border-color: #10b981 !important;
+  color: #fff !important;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.35) !important;
+}
+
+#pauseButton[on="true"] {
+  background: rgba(245, 158, 11, 0.18) !important;
+  border-color: var(--ml-amber) !important;
+  color: #fbbf24 !important;
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.35) !important;
+}
+
+/* Reset Button Special Style */
+#resetButton {
+  background: rgba(244, 63, 94, 0.1) !important;
+  border-color: rgba(244, 63, 94, 0.3) !important;
+  color: #fb7185 !important;
+}
+
+#resetButton:hover {
+  background: rgba(244, 63, 94, 0.25) !important;
+  border-color: var(--ml-rose) !important;
+  color: #fff !important;
+  box-shadow: 0 0 16px rgba(244, 63, 94, 0.4) !important;
+}
+
+/* Brush Size Controller Group */
+.modern-brush-control {
+  display: inline-flex !important;
+  align-items: center !important;
+  background: rgba(6, 10, 22, 0.6) !important;
+  border: 1px solid var(--ml-border-subtle) !important;
+  border-radius: var(--ml-radius-md) !important;
+  padding: 2px !important;
+  gap: 2px !important;
+}
+
+.modern-brush-control button {
+  height: 30px !important;
+  width: 30px !important;
+  min-width: 30px !important;
+  padding: 0 !important;
+  border-radius: var(--ml-radius-sm) !important;
+  border: none !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.modern-brush-control button:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: transparent !important;
+  transform: none !important;
+}
+
+.modern-brush-badge {
+  font-family: var(--ml-font-mono) !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  font-variant-numeric: tabular-nums !important;
+  padding: 0 10px !important;
+  color: var(--ml-cyan) !important;
+  min-width: 65px !important;
+  text-align: center !important;
+  user-select: none !important;
+}
+
+/* ==========================================================================
+   INTERACTIVE TOOLS STRIP (#category-tools)
+   Sửa triệt để lỗi flex-grow: 1 làm nút bị kéo dãn thô kệch
+   ========================================================================== */
+#category-tools,
+#category-edit {
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  padding: 8px 12px !important;
+  margin-bottom: 10px !important;
+  background: var(--ml-bg-surface) !important;
+  backdrop-filter: var(--ml-backdrop-blur) !important;
+  -webkit-backdrop-filter: var(--ml-backdrop-blur) !important;
+  border: 1px solid var(--ml-border-subtle) !important;
+  border-radius: var(--ml-radius-lg) !important;
+  align-items: center !important;
+  box-shadow: var(--ml-shadow-panel) !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  overflow-x: auto !important;
+}
+
+#category-tools {
+  display: flex !important;
+}
+
+#category-edit {
+  display: none;
+}
+
+#category-edit[style*="display: flex"],
+#category-edit[style*="display:flex"] {
+  display: flex !important;
+}
+
+#category-edit[style*="display: none"],
+#category-edit[style*="display:none"] {
+  display: none !important;
+}
+
+#category-tools button,
+#category-tools .elementButton,
+#category-edit button,
+#category-edit .elementButton {
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  height: 34px !important;
+  padding: 6px 14px !important;
+  border-radius: var(--ml-radius-md) !important;
+  border: 1px solid var(--ml-border-subtle) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: var(--ml-text-main) !important;
+  font-family: var(--ml-font) !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  text-transform: capitalize !important;
+  box-shadow: none !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  outline: none !important;
+}
+
+#category-tools button:hover,
+#category-tools .elementButton:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
+}
+
+#category-tools button:active,
+#category-tools .elementButton:active {
+  transform: translateY(0) scale(0.96) !important;
+}
+
+#category-tools button[current="true"],
+#category-tools .elementButton[current="true"] {
+  background: rgba(0, 240, 255, 0.18) !important;
+  border-color: var(--ml-cyan) !important;
+  color: #fff !important;
+  box-shadow: 0 0 14px var(--ml-cyan-glow) !important;
+}
+
+/* ==========================================================================
+   CATEGORY TABS (CATEGORY CONTROLS)
+   Sửa triệt để lỗi co giãn không đều khi cuộn ngang
+   ========================================================================== */
+#categoryControls {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-behavior: smooth !important;
+  -webkit-overflow-scrolling: touch !important;
+  gap: 6px !important;
+  padding: 8px 6px !important;
+  margin-bottom: 10px !important;
+  background: rgba(13, 20, 36, 0.65) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1px solid var(--ml-border-subtle) !important;
+  border-radius: var(--ml-radius-full) !important;
+  align-items: center !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#categoryControls button,
+.categoryButton {
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  border-radius: var(--ml-radius-full) !important;
+  border: 1px solid var(--ml-border-subtle) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--ml-text-muted) !important;
+  font-family: var(--ml-font) !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  padding: 6px 16px !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  outline: none !important;
+  user-select: none !important;
+}
+
+.categoryButton:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  transform: translateY(-1px) !important;
+}
+
+.categoryButton[current="true"] {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.25) 0%, rgba(139, 92, 246, 0.25) 100%) !important;
+  border-color: var(--ml-cyan) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 16px var(--ml-cyan-glow) !important;
+  font-weight: 700 !important;
+}
+
+/* Category Controls Custom Scrollbar */
+#categoryControls::-webkit-scrollbar {
+  height: 4px !important;
+}
+#categoryControls::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+#categoryControls::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-radius: 9999px !important;
+}
+#categoryControls::-webkit-scrollbar-thumb:hover {
+  background: var(--ml-cyan) !important;
+}
+
+/* ==========================================================================
+   ELEMENT CONTROLS & ELEMENT BUTTONS (CARDS/CHIPS)
+   ========================================================================== */
+#elementControls {
+  background: var(--ml-bg-surface) !important;
+  backdrop-filter: var(--ml-backdrop-blur) !important;
+  -webkit-backdrop-filter: var(--ml-backdrop-blur) !important;
+  border: 1px solid var(--ml-border-subtle) !important;
+  border-radius: var(--ml-radius-lg) !important;
+  padding: 12px !important;
+  max-height: 290px !important;
+  overflow-y: auto !important;
+  box-shadow: var(--ml-shadow-panel) !important;
+}
+
+.category {
+  display: none;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  margin: 0 !important;
+}
+
+.category[style*="display: flex"],
+.category[style*="display:flex"] {
+  display: flex !important;
+}
+
+.category[style*="display: none"],
+.category[style*="display:none"] {
+  display: none !important;
+}
+
+.elementButton {
+  clip-path: none !important;
+  border-radius: var(--ml-radius-sm) !important;
+  /* Override the old flat solid colored background from Sandboxels */
+  background: rgba(16, 24, 40, 0.8) !important;
+  background-image: none !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-left: 3.5px solid var(--elem-color, rgba(0, 240, 255, 0.6)) !important;
+  font-family: var(--ml-font) !important;
+  font-size: 0.77rem !important;
+  font-weight: 600 !important;
+  padding: 6px 12px 6px 9px !important;
+  cursor: pointer !important;
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  position: relative !important;
+  color: #f8fafc !important;
+  text-shadow: none !important;
+  outline: none !important;
+  user-select: none !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
+}
+
+.modern-elem-dot {
+  width: 10px !important;
+  height: 10px !important;
+  min-width: 10px !important;
+  border-radius: 50% !important;
+  display: inline-block !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  flex-shrink: 0 !important;
+  pointer-events: none !important;
+}
+
+.modern-elem-text {
+  white-space: nowrap !important;
+  color: #f8fafc !important;
+  font-size: 0.78rem !important;
+  letter-spacing: -0.01em !important;
+  pointer-events: none !important;
+}
+
+.elementButton:hover {
+  background: rgba(28, 40, 68, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  border-left-color: var(--elem-color, #00f0ff) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6), 0 0 12px var(--elem-color, rgba(0, 240, 255, 0.3)) !important;
+  color: #ffffff !important;
+  z-index: 5 !important;
+}
+
+.elementButton:active {
+  transform: translateY(0) scale(0.97) !important;
+}
+
+/* Active Selected Element Chip */
+.elementButton[current="true"] {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.22), rgba(139, 92, 246, 0.22)) !important;
+  border-color: var(--ml-cyan) !important;
+  border-left: 3.5px solid var(--ml-cyan) !important;
+  box-shadow: 0 0 16px var(--ml-cyan-glow), inset 0 0 0 1px rgba(255, 255, 255, 0.4) !important;
+  transform: translateY(-1px) scale(1.04) !important;
+  color: #ffffff !important;
+  z-index: 10 !important;
+}
+
+.elementButton[current="true"] .modern-elem-dot {
+  box-shadow: 0 0 10px #00f0ff !important;
+  border-color: #ffffff !important;
+}
+
+/* ==========================================================================
+   MODAL POPUPS & MENUS (INFO, SAVES, MODS, SETTINGS)
+   ========================================================================== */
+.menuScreen,
+#infoScreen,
+#modManager,
+#settingsMenu,
+#savePromptMenu {
+  background: var(--ml-bg-surface-elevated) !important;
+  backdrop-filter: blur(28px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+  border: 1px solid var(--ml-border-medium) !important;
+  border-radius: var(--ml-radius-xl) !important;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+  font-family: var(--ml-font) !important;
+  color: var(--ml-text-main) !important;
+  padding: 24px !important;
+  z-index: 10000 !important;
+}
+
+.menuTitle {
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  background: linear-gradient(90deg, #ffffff 0%, var(--ml-cyan) 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  margin-bottom: 16px !important;
+}
+
+.menuTab {
+  border-radius: var(--ml-radius-md) !important;
+  font-family: var(--ml-font) !important;
+  border: 1px solid var(--ml-border-subtle) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--ml-text-muted) !important;
+  padding: 8px 16px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.menuTab:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+}
+
+.menuTab.selected {
+  background: var(--ml-cyan) !important;
+  color: #030712 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 14px var(--ml-cyan-glow) !important;
+  border-color: var(--ml-cyan) !important;
+}
+
+/* Settings Form Controls & High-Tech Inputs */
+#settingsMenu .menuText,
+#savesMenu .menuText,
+.menuText,
+.settingsButton,
+select,
+.toggleInput,
+#settingsMenu input,
+#settingsMenu select,
+.button {
+  font-family: var(--ml-font) !important;
+  font-size: 0.88rem !important;
+  border-radius: var(--ml-radius-sm) !important;
+  border: 1px solid var(--ml-border-subtle) !important;
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  color: var(--ml-text-main) !important;
+  padding: 6px 12px !important;
+  outline: none !important;
+  transition: all 0.2s ease !important;
+}
+
+select:focus,
+input:focus,
+.toggleInput:hover,
+.settingsButton:hover {
+  border-color: var(--ml-cyan) !important;
+  box-shadow: 0 0 10px var(--ml-cyan-glow) !important;
+}
+
+/* Close button in modal */
+.menuClose,
+.menuCloseButton,
+button.menuClose {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid var(--ml-border-subtle) !important;
+  color: var(--ml-text-muted) !important;
+  border-radius: var(--ml-radius-sm) !important;
+  padding: 4px 10px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.menuClose:hover,
+.menuCloseButton:hover,
+button.menuClose:hover {
+  background: rgba(244, 63, 94, 0.2) !important;
+  color: var(--ml-rose) !important;
+  border-color: var(--ml-rose) !important;
+}
+
+/* ==========================================================================
+   CUSTOM HIGH-TECH SCROLLBARS
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(6, 10, 22, 0.4);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 240, 255, 0.5);
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+}
+
+/* ==========================================================================
+   FOOTER / EXTRA INFO
+   ========================================================================== */
+#extraInfo {
+  margin-top: 14px;
+  border-top: 1px solid var(--ml-border-subtle);
+  padding-top: 12px;
+  color: var(--ml-text-dim);
+  font-size: 0.76rem;
+  font-family: var(--ml-font);
+}
+
+#extraInfo a {
+  color: var(--ml-cyan) !important;
+  text-decoration: none !important;
+  transition: color 0.15s ease;
+}
+
+#extraInfo a:hover {
+  color: #fff !important;
+  text-decoration: underline !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+@media screen and (max-width: 860px) {
+  #modern-top-bar {
+    padding: 8px 14px;
+    flex-wrap: wrap;
+  }
+  .modern-center-info {
+    order: 3;
+    max-width: 100%;
+    width: 100%;
+    margin-top: 4px;
+  }
+  .modern-search-box {
+    max-width: 100%;
+  }
+  #totalWrapper {
+    padding: 0 10px 30px 10px;
+  }
+}
+
+/* ==========================================================================
+   BOTTOM INFO / CONTROLS CLEANUP
+   Xóa bỏ hoàn toàn phần Introduction theo yêu cầu người dùng
+   ========================================================================== */
+#bottomLeftBox,
+#introTitle,
+#introImage,
+[id^="intro"],
+#bottomTopBoxColumns,
+#newsletterFrame {
+  display: none !important;
+}
+
+#bottomInfoBox {
+  margin: 20px auto 40px auto !important;
+  max-width: 720px !important;
+  padding: 0 10px !important;
+}
+
+#bottomTopBox {
+  text-align: center !important;
+  margin: 15px 0 !important;
+}
+
+#langSelectP {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 0.82rem !important;
+  color: var(--ml-text-dim) !important;
+}
+
+#langSelect {
+  background: var(--ml-bg-surface-elevated) !important;
+  border: 1px solid var(--ml-border-subtle) !important;
+  color: var(--ml-text-main) !important;
+  padding: 6px 12px !important;
+  border-radius: var(--ml-radius-md) !important;
+  outline: none !important;
+  font-size: 0.82rem !important;
+  cursor: pointer !important;
+}
+
+#langSelect option, #langSelect optgroup {
+  background: #0d1424 !important;
+  color: #fff !important;
+}
+
+#bottomRightBox {
+  float: none !important;
+  width: 100% !important;
+  max-width: 720px !important;
+  margin: 20px auto !important;
+  background: var(--ml-bg-surface) !important;
+  backdrop-filter: var(--ml-backdrop-blur) !important;
+  -webkit-backdrop-filter: var(--ml-backdrop-blur) !important;
+  border: 1px solid var(--ml-border-subtle) !important;
+  border-radius: var(--ml-radius-lg) !important;
+  padding: 18px 24px !important;
+  box-shadow: var(--ml-shadow-panel) !important;
+  text-align: left !important;
+}
+
+#bottomRightBox h2 {
+  margin-top: 0 !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  color: var(--ml-cyan) !important;
+  border-bottom: 1px solid var(--ml-border-subtle) !important;
+  padding-bottom: 10px !important;
+  margin-bottom: 12px !important;
+}
+
+#controlsTable {
+  width: 100% !important;
+  border-collapse: collapse !important;
+}
+
+#controlsTable td {
+  padding: 7px 4px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+  font-size: 0.82rem !important;
+  color: var(--ml-text-muted) !important;
+}
+
+#controlsTable tr:last-child td {
+  border-bottom: none !important;
+}
+
+kbd {
+  font-family: var(--ml-font-mono) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: var(--ml-radius-xs) !important;
+  padding: 2px 7px !important;
+  font-size: 0.76rem !important;
+  color: var(--ml-cyan) !important;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4) !important;
+  display: inline-block !important;
+  margin: 0 2px !important;
+}
