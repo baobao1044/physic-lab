@@ -1221,33 +1221,14 @@ button.menuClose:hover {
   padding: 0 10px !important;
 }
 
-#bottomTopBox {
-  text-align: center !important;
-  margin: 15px 0 !important;
-}
-
+#bottomTopBox,
 #langSelectP {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  font-size: 0.82rem !important;
-  color: var(--ml-text-dim) !important;
-}
-
-#langSelect {
-  background: var(--ml-bg-surface-elevated) !important;
-  border: 1px solid var(--ml-border-subtle) !important;
-  color: var(--ml-text-main) !important;
-  padding: 6px 12px !important;
-  border-radius: var(--ml-radius-md) !important;
-  outline: none !important;
-  font-size: 0.82rem !important;
-  cursor: pointer !important;
-}
-
-#langSelect option, #langSelect optgroup {
-  background: #0d1424 !important;
-  color: #fff !important;
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: none !important;
 }
 
 #bottomRightBox {

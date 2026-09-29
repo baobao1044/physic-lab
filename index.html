@@ -20864,7 +20864,7 @@ window.onload = function() {
 }
 	</script>
 	<link rel="stylesheet" type="text/css" href="style.css?nocache=4">
-	<link rel="stylesheet" type="text/css" href="modern-ui.css?v=8">
+	<link rel="stylesheet" type="text/css" href="modern-ui.css?v=9">
 </head>
 
 <body>
@@ -21255,9 +21255,9 @@ window.onload = function() {
 </div>
 
 <div id="bottomInfoBox">
-	<div id="bottomTopBox">
+	<div id="bottomTopBox" style="display: none !important;">
 		<!-- <iframe src="promo.html" style="border:none;width: 300px; height: 250px;"></iframe> -->
-		<p id="langSelectP">🌐 <span id="langSelectLabel">Language</span> <a href="https://sandboxels.R74n.com/translate" target="_blank">[BETA]</a>: <select onchange="if (this.value === 'en'){setSetting('lang',null)}else{setSetting('lang',this.value)}window.location.reload()" id="langSelect">
+		<p id="langSelectP" style="display: none !important;">🌐 <span id="langSelectLabel">Language</span> <a href="https://sandboxels.R74n.com/translate" target="_blank">[BETA]</a>: <select onchange="if (this.value === 'en'){setSetting('lang',null)}else{setSetting('lang',this.value)}window.location.reload()" id="langSelect">
 			<option selected value="en">English (American)</option>
 			<option value="en_gb">English (British)</option>
 			<option value="en_ca">English (Canadian)</option>
@@ -21477,7 +21477,7 @@ if (document.referrer && document.referrer.indexOf("r74n.") === -1) {
 	gtag('config', 'UA-93720349-9');
 </script>
 
-	<script src="scripts/modern-ui.js?v=8"></script>
+	<script src="scripts/modern-ui.js?v=9"></script>
 </body>
 
 </html>
